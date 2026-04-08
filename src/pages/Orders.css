@@ -1,0 +1,116 @@
+.orders-page { padding: 2.5rem 0 5rem; }
+
+.orders-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 5rem 2rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.orders-empty h2 { font-size: 1.3rem; color: var(--text-secondary); }
+.orders-empty p { font-size: 0.9rem; }
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.order-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.order-card:hover {
+  border-color: var(--border-glass-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.order-card__id {
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: monospace;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.order-card__date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.order-card__items {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.order-item-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.order-item-preview__img {
+  width: 46px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--bg-tertiary);
+  flex-shrink: 0;
+}
+
+.order-item-preview__name {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-item-preview__qty {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.order-item-more {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-left: 58px;
+}
+
+.order-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-glass);
+  background: var(--bg-tertiary);
+}
+
+.order-card__total {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.order-card__total strong { color: var(--text-primary); }
