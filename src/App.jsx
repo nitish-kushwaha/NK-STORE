@@ -3,7 +3,8 @@ import { Suspense, lazy } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import AdminLayout from './components/admin/AdminLayout';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './context/useAuth';
 import { CartProvider } from './context/CartContext';
 
 // Store Pages (lazy loaded)

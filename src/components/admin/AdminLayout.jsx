@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, Users,
   ChevronRight, LogOut, X, Menu, Shield
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 import './AdminLayout.css';
 
 const ADMIN_LINKS = [

@@ -1,4 +1,4 @@
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Calendar, Package, LogOut, ShoppingBag } from 'lucide-react';
 import './Profile.css';
