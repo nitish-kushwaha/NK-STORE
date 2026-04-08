@@ -5,8 +5,6 @@ import {
   doc,
   query,
   where,
-  orderBy,
-  limit,
   addDoc,
   updateDoc,
   deleteDoc,
@@ -119,43 +117,47 @@ export async function getProducts(filters = {}) {
     if (filters.featured) {
       constraints.push(where('featured', '==', true));
     }
-    constraints.push(orderBy('createdAt', 'desc'));
-    if (filters.limit) {
-      constraints.push(limit(filters.limit));
-    }
+    // ⚠️ No orderBy here — Firestore requires a composite index when
+    // combining where() + orderBy(). Sort in-memory instead.
 
     q = query(q, ...constraints);
-    const snap = await withTimeout(getDocs(q), 5000);
-    const results = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    
-    // If Firestore is empty, return demo data with local IDs
+    const snap = await withTimeout(getDocs(q), 6000);
+    let results = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+    // Sort newest-first in memory (no index needed)
+    results.sort((a, b) => {
+      const aTime = a.createdAt?.seconds ?? 0;
+      const bTime = b.createdAt?.seconds ?? 0;
+      return bTime - aTime;
+    });
+
+    if (filters.limit) results = results.slice(0, filters.limit);
+
+    // If Firestore is empty, fall back to demo data
     if (results.length === 0) {
-      return DEMO_PRODUCTS.map((p, i) => ({
-        ...p,
-        id: `demo-${i}`,
-        createdAt: new Date(),
-      })).filter((p) => {
-        if (filters.featured && !p.featured) return false;
-        if (filters.category && p.category !== filters.category) return false;
-        return true;
-      }).slice(0, filters.limit || 999);
+      return buildDemoFallback(filters);
     }
-    
+
     return results;
   } catch (err) {
-    // On any failure (permissions, timeout, offline) — fall back to demo data
+    // On any failure (permissions, timeout, missing index) — use demo data
     console.warn('Firestore unavailable, using demo data:', err.message);
-    return DEMO_PRODUCTS.map((p, i) => ({
-      ...p,
-      id: `demo-${i}`,
-      createdAt: new Date(),
-    })).filter((p) => {
-      if (filters.featured && !p.featured) return false;
-      if (filters.category && p.category !== filters.category) return false;
-      return true;
-    }).slice(0, filters.limit || 999);
+    return buildDemoFallback(filters);
   }
 }
+
+function buildDemoFallback(filters) {
+  let data = DEMO_PRODUCTS.map((p, i) => ({
+    ...p,
+    id: `demo-${i}`,
+    createdAt: { seconds: Date.now() / 1000 - i * 1000 },
+  }));
+  if (filters.featured) data = data.filter((p) => p.featured);
+  if (filters.category) data = data.filter((p) => p.category === filters.category);
+  if (filters.limit)    data = data.slice(0, filters.limit);
+  return data;
+}
+
 
 export async function getProductById(id) {
   // Handle demo product IDs
