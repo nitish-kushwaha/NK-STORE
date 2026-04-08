@@ -40,3 +40,14 @@ export async function getUserOrders(userId) {
 export async function updateOrderStatus(orderId, status) {
   return updateDoc(doc(db, 'orders', orderId), { status });
 }
+
+export async function getAllOrders() {
+  try {
+    const q = query(collection(db, 'orders'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  } catch (err) {
+    console.warn('getAllOrders error:', err.message);
+    return [];
+  }
+}

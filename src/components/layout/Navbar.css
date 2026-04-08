@@ -209,6 +209,15 @@
   color: var(--color-error);
 }
 
+.navbar__dropdown-item--admin {
+  color: var(--accent-primary) !important;
+  font-weight: 600;
+}
+
+.navbar__dropdown-item--admin:hover {
+  background: var(--accent-glow-soft);
+}
+
 .navbar__dropdown-divider {
   height: 1px;
   background: var(--border-glass);

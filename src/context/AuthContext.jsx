@@ -69,7 +69,9 @@ export function AuthProvider({ children }) {
 
   const logout = () => signOut(auth);
 
-  const isAdmin = user?.profile?.role === 'admin';
+  // Admin: Firestore role OR dev override via localStorage
+  const isAdmin = user?.profile?.role === 'admin' ||
+    (user && localStorage.getItem('nkstore_admin_override') === user.uid);
 
   return (
     <AuthContext.Provider value={{ user, loading, login, loginWithGoogle, register, logout, isAdmin }}>

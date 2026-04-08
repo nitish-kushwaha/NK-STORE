@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Search, Menu, X, User, LogOut, Package, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, User, LogOut, Package, ChevronDown, Shield } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import CartDrawer from './CartDrawer';
@@ -146,6 +146,11 @@ export default function Navbar() {
                     <Link to="/orders" className="navbar__dropdown-item" onClick={() => setUserOpen(false)}>
                       <Package size={15} /> My Orders
                     </Link>
+                    {isAdmin && (
+                      <Link to="/admin" className="navbar__dropdown-item navbar__dropdown-item--admin" onClick={() => setUserOpen(false)}>
+                        <Shield size={15} /> Admin Panel
+                      </Link>
+                    )}
                     <div className="navbar__dropdown-divider" />
                     <button className="navbar__dropdown-item navbar__dropdown-item--danger" onClick={handleLogout}>
                       <LogOut size={15} /> Sign Out
@@ -159,7 +164,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Actions */}
-          <div className="navbar__mobile-actions mobile-only" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <div className="navbar__mobile-actions mobile-only" style={{ gap: '0.5rem', alignItems: 'center' }}>
             <button
               className="btn btn-icon btn-ghost navbar__cart-btn"
               onClick={() => setCartOpen(true)}

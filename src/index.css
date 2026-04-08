@@ -299,6 +299,12 @@ input, textarea, select {
   border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
+.badge-gray {
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--text-muted);
+  border: 1px solid var(--border-glass);
+}
+
 /* ========== CARD ========== */
 .card {
   background: var(--bg-secondary);

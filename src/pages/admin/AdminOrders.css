@@ -1,0 +1,118 @@
+.admin-orders-filters {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-status-filter {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.admin-filter-btn {
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition-fast);
+}
+
+.admin-filter-btn:hover {
+  border-color: var(--border-glass-hover);
+  color: var(--text-primary);
+}
+
+.admin-filter-btn--active {
+  background: var(--accent-glow-soft);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: var(--accent-primary);
+}
+
+.admin-status-select {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.admin-status-select:focus { border-color: var(--accent-primary); }
+
+.admin-table-row--expanded > td {
+  background: var(--bg-glass);
+  border-bottom: none;
+}
+
+.admin-order-detail-row > td {
+  padding: 0 !important;
+}
+
+.admin-order-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-glass);
+  animation: fadeDown 0.2s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-order-detail__label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.admin-order-detail__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.admin-order-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-glass);
+  font-size: 0.875rem;
+}
+
+.admin-order-item:last-child { border-bottom: none; }
+
+.admin-order-item-img {
+  width: 40px;
+  height: 30px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .admin-orders-filters { flex-direction: column; }
+  .admin-order-detail { grid-template-columns: 1fr; }
+}
